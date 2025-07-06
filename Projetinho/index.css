@@ -1,0 +1,222 @@
+/* Reset básico (ainda verificar)*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+}
+
+/* Estilo da página geral e ver cor mais corporativa (se existir?)*/
+body {
+   height: 100vh;
+    color: #333;
+    padding: 60px;
+
+   overflow: hidden !important;
+   background: #257494;
+background: linear-gradient(90deg, rgba(37, 116, 148, 1) 0%, rgba(71, 255, 231, 1) 0%, rgba(0, 25, 255, 1) 97%);
+}
+
+
+
+/* Título principal */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 20px;
+}
+
+/* Container de cada pergunta */
+.pergunta {
+    background-color: #8de1fa;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 3px solid #a3a3a3;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: block;
+    margin: 30px auto 0;
+      background-color: #bebebe;
+
+    transition: background-color 0.3s;
+    outline: black;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+
+    
+}
+
+
+/* titulo da pergunta. */
+.titulo {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #000000;
+    text-align: center;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+
+    
+}
+
+/* Lista de alternativas, melhorar?*/
+.pergunta ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+/* Botões de alternativas meio ruim*/
+.alternativa {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 10px 15px;
+    width: 100%;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s, transform 0.1s;
+     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: block;
+    text-align: center;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+
+    
+}
+
+.alternativa:hover {
+    background-color: #78c9ff;
+}
+
+.alternativa:active {
+    transform: scale(0.98);
+}
+
+/* Botão de verificação */
+#validador {
+    display: block;
+    margin: 30px auto 0;
+    font-size: 18px;
+    background-color: #23b1d4;
+    color: white;
+
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    outline: black;
+font-family: 'Pixelify Sans', cursive;
+cursor: pointer;
+  transform: scale(1.05);
+}
+
+
+
+
+
+#validador:hover {
+    background-color: #135f92;
+}
+
+
+.enunciado {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #000000;
+    text-align: center;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+    
+}
+
+.container-texto {
+  font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    color: #000000;
+    text-align: center;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+}
+.texto-principal {
+font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #000000;
+    text-align: center;
+font-family: 'Pixelify Sans', cursive;
+
+
+
+}
+
+.navbar {
+    background-color: #999999;
+    color: white;
+    padding: 10px 20px;
+font-family: 'VT323', monospace;
+
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #ffffff;
+}
+
+.navbar-logo {
+    font-size: 20px;
+    font-weight: bold;
+font-family: 'Pixelify Sans', cursive;
+
+
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.navbar-links li a:hover {
+    color: #00ffea;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+  
+#container-perguntas { 
+    max-height: 62vh;
+    overflow-y: auto;
+}

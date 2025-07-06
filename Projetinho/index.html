@@ -1,3 +1,149 @@
-<div id="quiz"></div>
-<button id="submit">Submit Quiz</button>
-<div id="results"></div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Perguntas</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="index.css">
+
+ 
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="navbar-logo">Quiz de Consciência Digital.</div>
+    <ul class="navbar-links">
+        <li><a href="#">Início</a></li>
+        <li><a href="#container-perguntas">Perguntas</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="container-texto">
+        <div class="texto-principal">Este site tem como objetivo auxiliar na compreensão do tema Consciência Digital. Complete o quiz e teste seus conhecimentos!
+        </div> 
+    </div>
+    
+
+    
+
+    <div id="container-perguntas">
+        <!-- As perguntas serão inseridas aqui via JS -->
+    </div>
+
+    <button id="validador"  onclick="validaRespostas()" style="padding: 10px 20px; font-size: 16px;">
+        Verificar Respostas
+    </button>
+
+    <script>
+        let validado = false
+        let respostas = []
+        let quantidadeTotalDePerguntas = 0
+        let acertos = 0
+        function aoClicarNaAlternativa(alternativa, pergunta, button) {
+          
+                //MUDAR CLASSE DO BOTAO
+                console.log(pergunta.id)
+                console.log(respostas.filter((r) => r.pergunta.id === pergunta.id))
+            if (respostas.filter((r) => r.pergunta.id === pergunta.id).length > 0) {
+                respostas = respostas.filter((r) => r.pergunta.id !== pergunta.id)
+            }
+            respostas.push({
+                alternativa,
+                pergunta,
+            }) 
+        }
+        function validaRespostas() {
+          
+            if (validado) {
+                  respostas = []
+                document.getElementById('validador').textContent = 'Verificar Respostas'
+                validado =false
+                acertos = 0
+                return
+                
+            }
+if (respostas.length < quantidadeTotalDePerguntas) {
+                    window.alert('TERMINE O QUESTIONARIO')
+                    return
+                }
+            for (const resposta of respostas) { 
+
+                if (resposta.alternativa.id === resposta.pergunta.alternativaCorretaId) {
+                    acertos++
+                }
+            }
+            document.getElementById('validador').textContent = `Acertos ${acertos}/${quantidadeTotalDePerguntas}`
+
+            setTimeout(() => {
+                document.getElementById('validador').textContent = 'Clique aqui para reiniciar'
+            }, 3000);
+            validado = true
+        }
+        
+        async function carregarPerguntas() {
+            try {
+                const resposta = await fetch('http://localhost:4050/perguntas');
+                const perguntas = await resposta.json();
+quantidadeTotalDePerguntas = perguntas.length
+                const container = document.getElementById('container-perguntas');
+                container.innerHTML = '';
+
+                perguntas.forEach(pergunta => {
+                    const div = document.createElement('div');
+                    div.className = 'pergunta';
+
+                    const titulo = document.createElement('div');
+                    titulo.className = 'titulo';
+                    titulo.innerText = pergunta.titulo;
+
+                    const enunciado = document.createElement('p');
+                    enunciado.className = 'enunciado'
+                    enunciado.innerText = pergunta.enunciado;
+
+                    const listaAlternativas = document.createElement('ul');
+                    pergunta.alternativas.forEach(alt => {
+
+                        
+                        // E QUE AO CLICAR NUM BUTTON ARMAZENAMOS A RESPOSTA DO USUARIO (dica, perguntar por onclick em um button na hora de renderizar html no JS pro GPT)
+                        const li = document.createElement('li')
+                        const button = document.createElement('button'); 
+                        button.onclick = () => aoClicarNaAlternativa(alt, pergunta, button)
+                        //POR FIM, QUANDO TODAS PERGUNTAS FOREM RESPONDIDAS, EXIBIR PONTUAÇÃO
+                        button.innerText = `${alt.alternativa}) ${alt.enunciado}`; 
+                        button.className = 'alternativa';
+                        li.appendChild(button)
+                        listaAlternativas.appendChild(li);
+                    });
+
+                    div.appendChild(titulo);
+                    div.appendChild(enunciado);
+                    div.appendChild(listaAlternativas);
+
+                    container.appendChild(div);
+                });
+            } catch (erro) {
+                console.error('Erro ao carregar perguntas:', erro);
+            }
+        }
+
+        function verificarRespostas() {
+            alert("Função verificarRespostas ainda não implementada.");
+        }
+
+
+
+
+        carregarPerguntas();
+    </script>
+</body>
+</html>

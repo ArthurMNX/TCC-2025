@@ -1,0 +1,25 @@
+.App {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.pergunta {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.pergunta h2 {
+  margin: 0 0 10px;
+}
+
+.alternativa {
+  margin-left: 20px;
+}
+
+.correta {
+  font-weight: bold;
+  color: green;
+  margin-left: 20px;
+}

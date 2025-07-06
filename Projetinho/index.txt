@@ -1,0 +1,134 @@
+const quizContainer = document.getElementById('quiz');
+const resultContainer = document.getElementById('results');
+const submitButton = document.getElementById('submit');
+
+const myQuestion = [
+    {
+        question:"Oque fazer caso o termo de serviços aparecer em um site que você acessou." ,
+        answer:{
+            a:"Clicar em aceitar e não ler.",
+            b:"Ler o termo de serviços e assim fazer a decisão de aceitar ou não.",
+            c:"Ler só o começo e decidir só com isso."
+        },
+        correctAnswer:"b"
+    },
+
+//Escrever mais, pelo menos 4+
+
+]
+
+function buildQuiz(){
+    const output =[];
+
+    myQuestions.forEach(
+        (currentQuestion, questionNumber) => {
+
+            const answer =[];
+
+            for(letter in currentQuestion.answer){
+                
+                answers.push(
+                    `<label>
+                    <input type="radio" name="question${questionNumber}" value="${letter}">
+                    ${letter} :
+                    ${currentQuestion.answer[letter]}
+                    </labels>`
+                );
+            }
+
+            output.push(
+                `<div class="question"> ${currentQuestion.question} </div>`
+                `<div class="answer"> ${answer.join(")} </div>``
+            );
+        }
+    );
+
+    quizContainer.innerHTML = output.join(");
+    }
+
+
+# No diretório do backend
+node server.js
+
+# No diretório do frontend
+npm start
+
+parte do antigo codigo app.js
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import QuestionList from './components/QuestionList';
+import QuestionForm from './components/QuestionForm';
+
+function App() {
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:4050/perguntas')
+      .then(response => setQuestions(response.data))
+      .catch(error => console.error('Erro ao carregar as perguntas', error));
+  }, []);
+
+  return (
+    <div className="App">
+      <h1>Perguntas e Respostas</h1>
+      <QuestionForm setQuestions={setQuestions} />
+      <QuestionList questions={questions} />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+  const lista = document.getElementById('lista-alternativas');
+
+    alternativas.forEach(alt => {
+        const li = document.createElement('li');
+        li.className = 'alternativa';
+
+        const botao = document.createElement('button');
+        botao.textContent = `${alt.alternativa}) ${alt.enunciado}`;
+        botao.className = 'botao-alternativa';
+
+        botao.addEventListener('click', () => {
+            if (pergunta.alternativaCorretaId === alt.id) {
+                botao.style.fontWeight = 'bold';
+                botao.style.color = 'green';
+                alert('Correta!');
+            } else {
+                botao.style.fontWeight = 'bold';
+                botao.style.color = 'red';
+                alert('Errada!');
+            }
+        });
+
+        li.appendChild(botao);
+        lista.appendChild(li);
+    });
+
+
+     const li = document.createElement('li'); 
+                        li.className = 'alternativa';
+                        li.innerText = `${alt.alternativa}) ${alt.enunciado}`;
+                        if (pergunta.alternativaCorretaId === alt.id) {
+                            li.style.fontWeight = 'bold';
+                            li.style.color = 'green';
+                        }
+                        listaAlternativas.appendChild(li);
+                    });
+
+                    div.appendChild(titulo);
+                    div.appendChild(enunciado);
+                    div.appendChild(listaAlternativas);
+
+                    container.appendChild(div);
+                });
+
+                             //SUBSTITUIR ESSA LOGICA ONDE CADA ALTERNATIVA VIRA UM LI
+                        // PARA UMA LOGICA ONDE CADA ALTERNATIVA VIRA UM BUTTON 
+                        // E QUE AO CLICAR NUM BUTTON ARMAZENAMOS A RESPOSTA DO USUARIO (dica, perguntar por onclick em um button na hora de renderizar html no JS pro GPT)
+                        //POR FIM, QUANDO TODAS PERGUNTAS FOREM RESPONDIDAS, EXIBIR PONTUAÇÃO
